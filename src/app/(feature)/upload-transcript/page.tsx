@@ -220,7 +220,7 @@ const UploadTranscriptPage = () => {
       key: "course_id",
       width: "10%",
       ...getColumnSearchProps("course_id"),
-      sorter: (a, b) => a.course_id.length - b.course_id.length,
+      sorter: (a, b) => a.course_id.toString().localeCompare(b.course_id.toString()),
       sortDirections: ["descend", "ascend"],
     },
     {
