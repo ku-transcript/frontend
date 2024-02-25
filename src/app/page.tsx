@@ -58,7 +58,7 @@ const LandingPage = () => {
   return (
     <>
       {/*  Hero section */}
-      <div className="min-h-screen bg-[#006664]">
+      <div className="min-h-screen bg-gradient-to-r from-green-700 to-green-900 text-white">
         <div className="relative overflow-hidden min-h-screen pb-56">
           {/* show clip when lg */}
           <div className="hidden lg:block absolute inset-y-0 h-full w-full">
@@ -82,40 +82,36 @@ const LandingPage = () => {
                   height={100}
                   className="w-20 h-20 text-white"
                 />
-                <a href="#" className="text-white text-3xl font-bold">
+                <div className="text-white text-3xl font-bold">
                   <div>KASETSART</div>
                   <div className=" font-light">UNIVERSITY</div>
-                </a>
+                </div>
               </div>
 
               {/* Regular menu for larger screens */}
               <div className="hidden lg:block mr-12 mt-2">
                 <ul className="flex space-x-8">
                   <li>
-                    <a href="#" className="text-white relative">
-                      <p className="z-10">
-                        <Link href={"curriculum"}>หลักสูตร</Link>
-                      </p>
+                    <Link href={"curriculum"} className="text-white relative">
+                      <div className="z-10">หลักสูตร</div>
                       <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-white  relative">
-                      <p className="z-10">
-                        <Link href={"upload-transcript"}>
-                          เช็คโดยใช้ Transcript
-                        </Link>
-                      </p>
+                    <Link
+                      href={"upload-transcript"}
+                      className="text-white  relative"
+                    >
+                      <div className="z-10">เช็คโดยใช้ Transcript</div>
+
                       <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="text-white  relative">
-                      <p className="z-10">
-                        <Link href={"fill-in"}>เช็คโดยไม่ใช้ Transcript</Link>
-                      </p>
+                    <Link href={"fill-in"} className="text-white  relative">
+                      <div className="z-10">เช็คโดยไม่ใช้ Transcript</div>
                       <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -137,7 +133,6 @@ const LandingPage = () => {
                 <div className="space-x-4">
                   <Button
                     type="primary"
-                    href="#"
                     onClick={() => setOpen(true)}
                     className="inline-block bg-white text-indigo-500 py-3 px-8 rounded-full shadow-md hover:bg-indigo-500 hover:text-white transition duration-300 ease-in-out"
                   >
@@ -185,7 +180,7 @@ const LandingPage = () => {
                 คุณสามารถค้นหาหลักสูตรและตรวจสอบเงื่อนไขในการจบการศึกษาว่ามีรายวิชาใดบ้างที่จำเป็นในการจบการศึกษา
               </p>
               {/* button */}
-              <Button type="primary" href="#" className="mt-8">
+              <Button type="primary" className="mt-8">
                 <Link href={"curriculum"}>ดูเพิ่มเติม</Link>
               </Button>
             </div>
@@ -213,7 +208,7 @@ const LandingPage = () => {
                 จบการศึกษาได้หรือไม่
               </p>
               {/* button */}
-              <Button type="primary" href="#" className="mt-8">
+              <Button type="primary" className="mt-8">
                 <Link href={"upload-transcript"}>อัพโหลด</Link>
               </Button>
             </div>
@@ -241,7 +236,7 @@ const LandingPage = () => {
                 กับเกรดที่ได้ลงทะเบียนแล้ว
               </p>
               {/* button */}
-              <Button type="primary" href="#" className="mt-8">
+              <Button type="primary" className="mt-8">
                 <Link href={"fill-in"}>กรอกข้อมูล</Link>
               </Button>
             </div>
@@ -250,7 +245,7 @@ const LandingPage = () => {
       </div>
 
       {/* About */}
-      <div className="bg-[#006664]">
+      <div className="bg-gradient-to-r from-green-700 to-green-900">
         <div className="max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto container">
           <h1 className="text-white text-4xl font-bold py-8 pb-48">
             เกี่ยวกับเรา
@@ -339,22 +334,16 @@ const LandingPage = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#006664] text-white py-12">
+      <footer className="bg-gradient-to-r from-green-700 to-green-900 text-white py-12">
         <div
           ref={ref5}
           className="max-w-7xl mx-auto flex flex-col items-center justify-center"
         >
           <p className="text-xl mb-4">ติดต่อเรา</p>
           <div className="flex space-x-4">
-            <a href="#" className="text-white hover:text-gray-300">
-              Facebook
-            </a>
-            <a href="#" className="text-white hover:text-gray-300">
-              Twitter
-            </a>
-            <a href="#" className="text-white hover:text-gray-300">
-              Instagram
-            </a>
+            <div className="text-white hover:text-gray-300">Facebook</div>
+            <div className="text-white hover:text-gray-300">Twitter</div>
+            <div className="text-white hover:text-gray-300">Instagram</div>
           </div>
           <p className="mt-4">
             &copy; 2024 KU Transcript. All rights reserved.
