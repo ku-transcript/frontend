@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { makeStore, AppStore } from "../store/store";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function StoreProvider({
   children,
@@ -18,19 +19,21 @@ export default function StoreProvider({
 
   return (
     <Provider store={storeRef.current}>
-      <AntdRegistry>
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: "#B2BB1E",
-              colorInfo: "#B2BB1E",
-              borderRadius: 14,
-            },
-          }}
-        >
-          {children}
-        </ConfigProvider>
-      </AntdRegistry>
+      <NextUIProvider>
+        <AntdRegistry>
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimary: "#B2BB1E",
+                colorInfo: "#B2BB1E",
+                borderRadius: 14,
+              },
+            }}
+          >
+            {children}
+          </ConfigProvider>
+        </AntdRegistry>
+      </NextUIProvider>
     </Provider>
   );
 }
