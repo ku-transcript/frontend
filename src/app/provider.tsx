@@ -22,9 +22,9 @@ export default function StoreProvider({
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: "#44a714",
-              colorInfo: "#44a714",
-              borderRadius: 8,
+              colorPrimary: "#B2BB1E",
+              colorInfo: "#B2BB1E",
+              borderRadius: 14,
             },
           }}
         >
