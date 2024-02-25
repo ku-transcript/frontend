@@ -6,9 +6,11 @@ export default function FeatureLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="bg-slate-100 min-h-screen">
       <NavbarComponent />
-      <div>{children}</div>
-    </>
+      <div className="max-w-7xl mx-auto px-4 sm:px-12 lg:px-36 container mt-4">
+        {children}
+      </div>
+    </div>
   );
 }

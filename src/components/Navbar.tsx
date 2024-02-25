@@ -77,13 +77,17 @@ export default function NavbarComponent() {
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
-          <p className="font-bold text-xl text-inherit">KU Transcript</p>
+          <Link href={"/"} className="font-bold text-xl text-inherit">
+            KU Transcript
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-8" justify="end">
         <NavbarBrand>
-          <p className="font-bold text-xl text-inherit">KU Transcript</p>
+          <Link href={"/"} className="font-bold text-xl text-inherit">
+            KU Transcript
+          </Link>
         </NavbarBrand>
         <NavbarItem>
           <Link href="curriculum" className="relative">
