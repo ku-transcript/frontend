@@ -18,16 +18,16 @@ const siteConfig = {
   description: "Sittipong Hemloun's personal website",
   navItems: [
     {
-      label: "Home",
+      label: "หลักสูตร",
       href: "/curriculum",
     },
     {
-      label: "About",
-      href: "/fill-in",
+      label: "เช็คโดยใช้ Transcript",
+      href: "/upload-transcript",
     },
     {
-      label: "Projects",
-      href: "/upload-transcript",
+      label: "เช็คโดยไม่ใช้ Transcript",
+      href: "/fill-in",
     },
   ],
   navMenuItems: [
@@ -47,7 +47,6 @@ const siteConfig = {
 };
 
 export default function NavbarComponent() {
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Close the menu when a NavbarMenuItem is clicked

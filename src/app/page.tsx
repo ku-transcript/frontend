@@ -130,13 +130,21 @@ const LandingPage = () => {
                   เพื่อความสะดวกสบายในการเช็คสถานะการจบการศึกษาของนิสิต
                   มหาวิทยาลัยเกษตรศาสตร์
                 </p>
-                <div className="space-x-4">
+                <div className="hidden md:block">
                   <Button
                     type="primary"
                     onClick={() => setOpen(true)}
-                    className="inline-block bg-white text-indigo-500 py-3 px-8 rounded-full shadow-md hover:bg-indigo-500 hover:text-white transition duration-300 ease-in-out"
+                    className="inline-block  py-3 px-8 rounded-full shadow-md transition duration-300 ease-in-out"
                   >
                     ฟีเจอร์ของเรา
+                  </Button>
+                </div>
+                <div className=" block md:hidden space-x-4">
+                  <Button type="primary" className="mt-8">
+                    <Link href={"upload-transcript"}>อัพโหลด</Link>
+                  </Button>
+                  <Button className="mt-8">
+                    <Link href={"curriculum"}>ค้นหาหลักสูตร</Link>
                   </Button>
                 </div>
               </div>
@@ -163,7 +171,7 @@ const LandingPage = () => {
             {/* card 1 */}
             <div
               ref={ref2}
-              className="col-span-4 mt-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex h-[500px] flex-col  -translate-y-36 lg:-translate-y-36"
+              className="col-span-4 mt-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex h-[500px] flex-col  -translate-y-36 lg:-translate-y-36 hover:scale-105 duration-300"
             >
               {/* image */}
               <Image
@@ -188,7 +196,7 @@ const LandingPage = () => {
             {/* card 2 */}
             <div
               ref={ref3}
-              className="col-span-4 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col -translate-y-36 lg:-translate-y-16"
+              className="col-span-4 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col -translate-y-36 lg:-translate-y-16 hover:scale-105 duration-300"
             >
               {/* image */}
               <Image
@@ -215,7 +223,7 @@ const LandingPage = () => {
             {/* card 3 */}
             <div
               ref={ref4}
-              className="col-span-4 mb-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col -translate-y-36 lg:-translate-y-36"
+              className="col-span-4 mb-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col -translate-y-36 lg:-translate-y-36 hover:scale-105 duration-300"
             >
               {/* image */}
               <Image
@@ -258,7 +266,7 @@ const LandingPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 container">
           <div className="grid lg:grid-cols-12 gap-8">
             {/* card 1 */}
-            <div className="col-span-4 bg-white shadow-lg rounded-lg flex h-[550px] flex-col -translate-y-36">
+            <div className="col-span-4 bg-white shadow-lg rounded-lg flex h-[550px] flex-col -translate-y-36 hover:scale-105 duration-300">
               {/* image */}
               <Image
                 src={Light}
@@ -285,7 +293,7 @@ const LandingPage = () => {
             </div>
 
             {/* card 2 */}
-            <div className="col-span-4  bg-white shadow-lg rounded-lg flex h-[550px] flex-col -translate-y-36">
+            <div className="col-span-4  bg-white shadow-lg rounded-lg flex h-[550px] flex-col -translate-y-36 hover:scale-105 duration-300">
               {/* image */}
               <Image
                 src={Data}
@@ -308,7 +316,7 @@ const LandingPage = () => {
               </div>
             </div>
             {/* card 3 */}
-            <div className="col-span-4  bg-white shadow-lg rounded-lg flex h-[550px] flex-col -translate-y-36">
+            <div className="col-span-4  bg-white shadow-lg rounded-lg flex h-[550px] flex-col -translate-y-36 hover:scale-105 duration-300">
               {/* image */}
               <Image
                 src={Unlock}

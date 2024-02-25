@@ -75,7 +75,8 @@ const UploadTranscriptPage = () => {
   const props: UploadProps = {
     name: "file",
     multiple: true,
-    action: "http://localhost:3000/upload-transcript",
+    // action: "http://localhost:3000/upload-transcript", // for local development
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188", // for production
     onChange(info) {
       const { status } = info.file;
       if (status !== "uploading") {
