@@ -6,7 +6,7 @@ import React, { useRef, useState } from "react";
 import Logo from "@/assets/ku-outstanding-footer-logo-white.png";
 import FeaturesOverview from "../../public/undraw_features_overview_re_2w78.svg";
 import FillForm from "../../public/undraw_fill_form_re_cwyf.svg";
-import GoingUp from "../../public/undraw_Going_up_re_86kg.svg";
+import GoingUp from "../../public/undraw_going_up_re_86kg.svg";
 import Data from "../../public/undraw_data_processing_yrrv.svg";
 import Light from "../../public/undraw_lightbulb_moment_re_ulyo.svg";
 import Unlock from "../../public/undraw_unlock_re_a558.svg";
