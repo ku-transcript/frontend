@@ -32,15 +32,15 @@ const siteConfig = {
   ],
   navMenuItems: [
     {
-      label: "Home",
+      label: "หลักสูตร",
       href: "/curriculum",
     },
     {
-      label: "About",
+      label: "เช็คโดยใช้ Transcript",
       href: "/fill-in",
     },
     {
-      label: "Projects",
+      label: "เช็คโดยไม่ใช้ Transcript",
       href: "/upload-transcript",
     },
   ],
