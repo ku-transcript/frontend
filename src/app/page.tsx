@@ -125,7 +125,7 @@ const LandingPage = () => {
                 <h1 className="text-4xl font-bold text-white mb-4">
                   KU Transcript
                 </h1>
-                <p className="text-xl text-white mb-8 max-w-96">
+                <p className="text-xl text-white mb-8 max-w-96 text-center lg:text-start">
                   เว็บไซต์นี้เป็นเว็บไซต์ที่จัดทำโดยนิสิตและเป็นเว็บไซต์ที่ออกแบบมา
                   เพื่อความสะดวกสบายในการเช็คสถานะการจบการศึกษาของนิสิต
                   มหาวิทยาลัยเกษตรศาสตร์
