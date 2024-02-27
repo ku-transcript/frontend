@@ -89,19 +89,19 @@ export default function NavbarComponent() {
           </Link>
         </NavbarBrand>
         <NavbarItem>
-          <Link href="curriculum" className="relative">
+          <Link href="/curriculum" className="relative">
             <div className="z-10">หลักสูตร</div>
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="upload-transcript" className="relative">
+          <Link href="/upload-transcript" className="relative">
             <div className="z-10">เช็คโดยใช้ Transcript</div>
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="fill-in" className="relative">
+          <Link href="/fill-in" className="relative">
             <div className="z-10">เช็คโดยไม่ใช้ Transcript</div>
             <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
           </Link>
