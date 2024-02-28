@@ -37,11 +37,11 @@ const siteConfig = {
     },
     {
       label: "เช็คโดยใช้ Transcript",
-      href: "/fill-in",
+      href: "/upload-transcript",
     },
     {
       label: "เช็คโดยไม่ใช้ Transcript",
-      href: "/upload-transcript",
+      href: "/fill-in",
     },
   ],
 };
