@@ -2,17 +2,24 @@
 
 import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
-import {
-  UploadProps,
-  message,
-  Upload,
-} from "antd";
+import { UploadProps, Upload } from "antd";
 
 import Result from "@/components/Result";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
+import {
+  transcriptSelector,
+  uploadTranscript,
+} from "@/store/slices/transcriptSlice";
+import { showNotification } from "@/store/slices/notificationSlice";
+import { NotificationType } from "@/types/notificationType";
 
 const { Dragger } = Upload;
 
 const UploadTranscriptPage = () => {
+  // Redux
+  const dispatch = useAppDispatch();
+  const transcriptReducer = useAppSelector(transcriptSelector);
+
   // upload transcript
   const [isUploaded, setIsUploaded] = React.useState(false);
 
@@ -25,16 +32,15 @@ const UploadTranscriptPage = () => {
       const { status } = info.file;
       if (status !== "uploading") {
         console.log(info.file, info.fileList);
+        setIsUploaded(true);
       }
       if (status === "done") {
-        message.success(`${info.file.name} file uploaded successfully.`);
-
+        console.log(`${info.file.name} file uploaded successfully.`);
         if (info.file.originFileObj) {
           handleUpload(info.file.originFileObj);
         }
-        setIsUploaded(true);
       } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        console.error(`${info.file.name} file upload failed.`);
       }
     },
     onDrop(e) {
@@ -42,8 +48,33 @@ const UploadTranscriptPage = () => {
     },
   };
 
-  const handleUpload = (file: File) => {
+  const handleUpload = async (file: File) => {
     console.log(file);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const actionResult = await dispatch(uploadTranscript(formData));
+      if (uploadTranscript.fulfilled.match(actionResult)) {
+        console.log("transcriptReducer", transcriptReducer);
+
+        dispatch(
+          showNotification({
+            message: "อัพโหลดทรานสคริปสำเร็จ",
+            type: NotificationType.Success,
+          })
+        );
+      } else {
+        dispatch(
+          showNotification({
+            message: "อัพโหลดทรานสคริปไม่สำเร็จ",
+            type: NotificationType.Error,
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Failed to upload transcript", error);
+    }
+    console.log("transcriptReducer", transcriptReducer);
   };
 
   return (
@@ -67,8 +98,14 @@ const UploadTranscriptPage = () => {
             </p>
           </Dragger>
         </div>
+      ) : transcriptReducer.status === "loading" ? (
+        <div className="mt-12 px-0 lg:px-28 flex justify-center items-center">
+          <div className="animate-spin rounded-full h-40 w-40 border-t-2 border-b-2 border-[#B2BB1E]"></div>
+        </div>
       ) : (
-        <Result />
+        transcriptReducer.transcriptData && (
+          <Result transcriptDataProps={transcriptReducer.transcriptData} />
+        )
       )}
     </>
   );

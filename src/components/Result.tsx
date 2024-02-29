@@ -1,12 +1,39 @@
 "use client";
 
+import { TranscriptData } from "@/types/resultUploaded";
+import {
+  calTotalCredit,
+  calAesthetics,
+  calCoreCourse,
+  calElectiveCourse,
+  calFacultyOfScience,
+  calFreeElective,
+  calMandatoryCourse,
+  calPercentLanguageAndCommunication,
+  calPercentLiveHappily,
+  calPercentScienceOfEntrepreneurship,
+  calThaiCitizensAndWorldCitizens,
+  numberFreeElective,
+} from "@/utils/calResult";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, GetRef, Input, Progress, ProgressProps, Space, Table, TableColumnType, TableColumnsType } from "antd";
+import {
+  Button,
+  GetRef,
+  Input,
+  Progress,
+  ProgressProps,
+  Space,
+  Table,
+  TableColumnType,
+  TableColumnsType,
+} from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
 import React, { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 
-type Props = {};
+type Props = {
+  transcriptDataProps: TranscriptData;
+};
 
 const twoColors: ProgressProps["strokeColor"] = {
   "0%": "#108ee9",
@@ -57,6 +84,25 @@ const data: DataType[] = [
 ];
 
 const Result = (props: Props) => {
+  // Props
+  const { transcriptDataProps } = props;
+  console.log("transcriptDataProps", transcriptDataProps);
+  const totalCreditPerCategory = transcriptDataProps.total_credit_per_category;
+  const totalCredit =
+    totalCreditPerCategory.อยู่ดีมีสุข +
+    totalCreditPerCategory.ศาสตร์แห่งผู้ประกอบการ +
+    totalCreditPerCategory.ภาษากับการสื่อสาร +
+    totalCreditPerCategory.พลเมืองไทยและพลเมืองโลก +
+    totalCreditPerCategory.สุนทรียศาสตร์ +
+    totalCreditPerCategory.วิชาแกน +
+    totalCreditPerCategory.วิชาเฉพาะบังคับ +
+    totalCreditPerCategory.วิชาเฉพาะเลือก;
+
+  console.log(
+    "totalCredit",
+    totalCredit
+  );
+
   // search table
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -249,7 +295,7 @@ const Result = (props: Props) => {
           type="dashboard"
           status="active"
           size={200}
-          percent={90}
+          percent={calTotalCredit(totalCredit)}
           strokeColor={twoColors}
         />
         <p className=" max-w-[500px] text-center text-gray-500">
@@ -265,18 +311,80 @@ const Result = (props: Props) => {
             <h3 className="my-2 text-xl text-center">
               หมวดหมู่วิชาศึกษาทั่วไป (30 หน่วยกิต)
             </h3>
-            <p>กลุ่มสาระอยู่ดีมีสุข (3 หน่วยกิต)</p>
-            <Progress percent={30} status="active" />
-            <p>กลุ่มสาระศาสตร์แห่งผู้ประกอบการ (3 หน่วยกิต)</p>
-            <Progress percent={50} status="active" />
-            <p>กลุ่มสาระภาษากับการสื่อสาร (13 หน่วยกิต)</p>
-            <Progress percent={70} status="active" />
-            <p>กลุ่มสาระพลเมืองไทยและพลเมืองโลก (3 หน่วยกิต)</p>
-            <Progress percent={100} status="active" />
-            <p>กลุ่มสาระสุนทรียศาสตร์ (3 หน่วยกิต)</p>
-            <Progress percent={50} status="active" />
-            <p>กลุ่มสาระคณะวิทยาศาสตร์ (5 หน่วยกิต)</p>
-            <Progress percent={50} status="active" />
+            <p>
+              กลุ่มสาระอยู่ดีมีสุข (
+              {transcriptDataProps.total_credit_per_category.อยู่ดีมีสุข}/3
+              หน่วยกิต)
+            </p>
+            <Progress
+              percent={calPercentLiveHappily(
+                transcriptDataProps.total_credit_per_category.อยู่ดีมีสุข
+              )}
+              status="active"
+            />
+            <p>
+              กลุ่มสาระศาสตร์แห่งผู้ประกอบการ (
+              {
+                transcriptDataProps.total_credit_per_category
+                  .ศาสตร์แห่งผู้ประกอบการ
+              }
+              /3 หน่วยกิต)
+            </p>
+            <Progress
+              percent={calPercentScienceOfEntrepreneurship(
+                transcriptDataProps.total_credit_per_category
+                  .ศาสตร์แห่งผู้ประกอบการ
+              )}
+              status="active"
+            />
+            <p>
+              กลุ่มสาระภาษากับการสื่อสาร (
+              {transcriptDataProps.total_credit_per_category.ภาษากับการสื่อสาร}
+              /13 หน่วยกิต)
+            </p>
+            <Progress
+              percent={calPercentLanguageAndCommunication(
+                transcriptDataProps.total_credit_per_category.ภาษากับการสื่อสาร
+              )}
+              status="active"
+            />
+            <p>
+              กลุ่มสาระพลเมืองไทยและพลเมืองโลก (
+              {
+                transcriptDataProps.total_credit_per_category
+                  .พลเมืองไทยและพลเมืองโลก
+              }
+              /3 หน่วยกิต)
+            </p>
+            <Progress
+              percent={calThaiCitizensAndWorldCitizens(
+                transcriptDataProps.total_credit_per_category
+                  .พลเมืองไทยและพลเมืองโลก
+              )}
+              status="active"
+            />
+            <p>
+              กลุ่มสาระสุนทรียศาสตร์ (
+              {transcriptDataProps.total_credit_per_category.สุนทรียศาสตร์}/3
+              หน่วยกิต)
+            </p>
+            <Progress
+              percent={calAesthetics(
+                transcriptDataProps.total_credit_per_category.สุนทรียศาสตร์
+              )}
+              status="active"
+            />
+            <p>
+              กลุ่มสาระคณะวิทยาศาสตร์ (
+              {transcriptDataProps.total_credit_per_category.คณะวิทยาศาสตร์}/5
+              หน่วยกิต)
+            </p>
+            <Progress
+              percent={calFacultyOfScience(
+                transcriptDataProps.total_credit_per_category.คณะวิทยาศาสตร์
+              )}
+              status="active"
+            />
           </div>
         </div>
         <div className=" col-span-6">
@@ -284,19 +392,70 @@ const Result = (props: Props) => {
             <h3 className="my-2 text-xl text-center">
               หมวดหมู่วิชาเฉพาะ (92 หน่วยกิต)
             </h3>
-            <p>วิชาแกน (16 หน่วยกิต)</p>
-            <Progress percent={30} status="active" />
-            <p>วิชาเฉพาะบังคับ (55 หน่วยกิต)</p>
-            <Progress percent={50} status="active" />
-            <p>วิชาเฉพาะเลือก (21 หน่วยกิต)</p>
-            <Progress percent={70} status="active" />
+            <p>
+              วิชาแกน ({transcriptDataProps.total_credit_per_category.วิชาแกน}
+              /16 หน่วยกิต)
+            </p>
+            <Progress
+              percent={calCoreCourse(
+                transcriptDataProps.total_credit_per_category.วิชาแกน
+              )}
+              status="active"
+            />
+            <p>
+              วิชาเฉพาะบังคับ (
+              {transcriptDataProps.total_credit_per_category.วิชาเฉพาะบังคับ}/55
+              หน่วยกิต)
+            </p>
+            <Progress
+              percent={calMandatoryCourse(
+                transcriptDataProps.total_credit_per_category.วิชาเฉพาะบังคับ
+              )}
+              status="active"
+            />
+            <p>
+              วิชาเฉพาะเลือก (
+              {transcriptDataProps.total_credit_per_category.วิชาเฉพาะเลือก}/21
+              หน่วยกิต)
+            </p>
+            <Progress
+              percent={calElectiveCourse(
+                transcriptDataProps.total_credit_per_category.วิชาเฉพาะเลือก
+              )}
+              status="active"
+            />
           </div>
           <div className="flex flex-col mt-4">
             <h3 className="my-2 text-xl text-center">
               หมวดวิชาเลือกเสรี (6 หน่วยกิต)
             </h3>
-            <p>วิชาเลือกเสรี (6 หน่วยกิต)</p>
-            <Progress percent={30} status="active" />
+            <p>
+              วิชาเลือกเสรี (
+              {numberFreeElective(
+                transcriptDataProps.total_credit_per_category.อยู่ดีมีสุข,
+                transcriptDataProps.total_credit_per_category
+                  .ศาสตร์แห่งผู้ประกอบการ,
+                transcriptDataProps.total_credit_per_category.ภาษากับการสื่อสาร,
+                transcriptDataProps.total_credit_per_category
+                  .พลเมืองไทยและพลเมืองโลก,
+                transcriptDataProps.total_credit_per_category.สุนทรียศาสตร์,
+                transcriptDataProps.total_credit_per_category.คณะวิทยาศาสตร์
+              )}
+              /6 หน่วยกิต)
+            </p>
+            <Progress
+              percent={calFreeElective(
+                transcriptDataProps.total_credit_per_category.อยู่ดีมีสุข,
+                transcriptDataProps.total_credit_per_category
+                  .ศาสตร์แห่งผู้ประกอบการ,
+                transcriptDataProps.total_credit_per_category.ภาษากับการสื่อสาร,
+                transcriptDataProps.total_credit_per_category
+                  .พลเมืองไทยและพลเมืองโลก,
+                transcriptDataProps.total_credit_per_category.สุนทรียศาสตร์,
+                transcriptDataProps.total_credit_per_category.คณะวิทยาศาสตร์
+              )}
+              status="active"
+            />
           </div>
         </div>
       </div>
