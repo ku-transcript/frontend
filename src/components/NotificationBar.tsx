@@ -30,10 +30,10 @@ const NotificationBar = () => {
         }`}
       >
         <div
-          className={`w-full max-w-sm mx-auto bg-${type}-500 text-white bg-white rounded-lg shadow-2xl border pointer-events-auto`}
+          className={`w-full max-w-sm mx-auto bg-${type}-500 text-white bg-white rounded-xl shadow-2xl border pointer-events-auto`}
         >
           <div className="flex items-center justify-between px-4 py-2 gap-x-4">
-            <p className="font-semibold text-black">{message}</p>
+            <p className="text-black">{message}</p>
             <button className="text-green-600" onClick={handleClose}>
               <svg
                 className="w-4 h-4 fill-current"

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import notificationSlice from "./slices/notificationSlice";
+import transcriptSlice from "./slices/transcriptSlice";
 
 export const makeStore = () =>
   configureStore({
     reducer: {
       notification: notificationSlice,
+      transcript: transcriptSlice,
     },
   });
 
