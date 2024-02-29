@@ -55,8 +55,6 @@ const UploadTranscriptPage = () => {
       formData.append("file", file);
       const actionResult = await dispatch(uploadTranscript(formData));
       if (uploadTranscript.fulfilled.match(actionResult)) {
-        console.log("transcriptReducer", transcriptReducer);
-
         dispatch(
           showNotification({
             message: "อัพโหลดทรานสคริปสำเร็จ",
@@ -74,7 +72,6 @@ const UploadTranscriptPage = () => {
     } catch (error) {
       console.error("Failed to upload transcript", error);
     }
-    console.log("transcriptReducer", transcriptReducer);
   };
 
   return (

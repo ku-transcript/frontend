@@ -46,8 +46,7 @@ interface DataType {
   course_id: string;
   course_name: string;
   course_credit: number;
-  course_category: string;
-  course_faculty: string;
+  student_grade: string;
 }
 
 type DataIndex = keyof DataType;
@@ -57,29 +56,25 @@ const data: DataType[] = [
     course_id: "01418442",
     course_name: "hell web tech",
     course_credit: 3,
-    course_category: "อยู่ดีมีสุข",
-    course_faculty: "คณะศึกษาศาสตร์",
+    student_grade: "F",
   },
   {
     course_id: "01361102",
     course_name: "Course name 2",
     course_credit: 2,
-    course_category: "ศาสตร์แห่งผู้ประกอบการ",
-    course_faculty: "คณะศึกษาศาสตร์",
+    student_grade: "Z",
   },
   {
     course_id: "01361103",
     course_name: "Course name 3",
     course_credit: 4,
-    course_category: "อยู่ดีมีสุข",
-    course_faculty: "คณะศึกษาศาสตร์",
+    student_grade: "SSR",
   },
   {
     course_id: "01361104",
     course_name: "Course name 4",
     course_credit: 3,
-    course_category: "ภาษากับการสื่อสาร",
-    course_faculty: "วิทยาลัยบูรณาการศาสตร์",
+    student_grade: "A",
   },
 ];
 
@@ -98,10 +93,7 @@ const Result = (props: Props) => {
     totalCreditPerCategory.วิชาเฉพาะบังคับ +
     totalCreditPerCategory.วิชาเฉพาะเลือก;
 
-  console.log(
-    "totalCredit",
-    totalCredit
-  );
+  console.log("totalCredit", totalCredit);
 
   // search table
   const [searchText, setSearchText] = useState("");
@@ -229,7 +221,7 @@ const Result = (props: Props) => {
       title: "ชื่อวิชา",
       dataIndex: "course_name",
       key: "course_name",
-      width: "30%",
+      width: "80%",
       ...getColumnSearchProps("course_name"),
     },
     {
@@ -237,23 +229,15 @@ const Result = (props: Props) => {
       dataIndex: "course_credit",
       key: "course_credit",
       width: "5%",
-    },
-    {
-      title: "กลุ่มสาระ",
-      dataIndex: "course_category",
-      key: "course_category",
-      width: "25%",
-      ...getColumnSearchProps("course_category"),
-      sorter: (a, b) => a.course_category.length - b.course_category.length,
+      sorter: (a, b) => a.course_credit - b.course_credit,
       sortDirections: ["descend", "ascend"],
     },
     {
-      title: "คณะ",
-      dataIndex: "course_faculty",
-      key: "course_faculty",
-      width: "30%",
-      ...getColumnSearchProps("course_faculty"),
-      sorter: (a, b) => a.course_faculty.length - b.course_faculty.length,
+      title: "เกรด",
+      dataIndex: "student_grade",
+      key: "student_grade",
+      width: "5%",
+      sorter: (a, b) => a.student_grade.length - b.student_grade.length,
       sortDirections: ["descend", "ascend"],
     },
   ];
@@ -269,39 +253,64 @@ const Result = (props: Props) => {
       title: "ชื่อวิชา",
       dataIndex: "course_name",
       key: "course_name",
-      width: "35%",
+      width: "80%",
       ...getColumnSearchProps("course_name"),
     },
     {
-      title: "กลุ่มสาระ",
-      dataIndex: "course_category",
-      key: "course_category",
-      width: "25%",
-      ...getColumnSearchProps("course_category"),
+      title: "หน่วยกิต",
+      dataIndex: "course_credit",
+      key: "course_credit",
+      width: "5%",
     },
     {
-      title: "คณะ",
-      dataIndex: "course_faculty",
-      key: "course_faculty",
-      width: "30%",
-      ...getColumnSearchProps("course_faculty"),
+      title: "เกรด",
+      dataIndex: "student_grade",
+      key: "student_grade",
+      width: "5%",
     },
   ];
 
   return (
-    <div className="mt-8">
-      <div className="flex flex-col w-full justify-center items-center">
-        <Progress
-          type="dashboard"
-          status="active"
-          size={200}
-          percent={calTotalCredit(totalCredit)}
-          strokeColor={twoColors}
-        />
-        <p className=" max-w-[500px] text-center text-gray-500">
-          ตรวจสอบสถานะการจบการศึกษาของคุณ หากพบวิชาที่ไม่ผ่านหรือไม่ได้ลงทะเบียน
-          กรุณาวางแผนหรือติดต่ออาจารย์ที่ปรึกษา
-        </p>
+    <div className="mt-4">
+      <div className="grid md:grid-cols-12 gap-4">
+        <div className=" col-span-12 md:col-span-5 border-2 p-4 rounded-xl bg-white">
+          <h3 className="my-2 text-xl">
+            {transcriptDataProps.student_en_title}{" "}
+            {transcriptDataProps.student_en_name}
+          </h3>
+          <hr className="mb-2" />
+          <p>
+            {transcriptDataProps.student_th_title}{" "}
+            {transcriptDataProps.student_th_name}
+          </p>
+          <p>รหัสนิสิต {transcriptDataProps.student_id}</p>
+          <p>เกรดเฉลี่ย {transcriptDataProps.student_cum_gpa}</p>
+          <p>หลักสูตร {transcriptDataProps.student_major}</p>
+          <p>คณะ {transcriptDataProps.student_faculty}</p>
+          <p>หน่วยกิตที่สอบผ่านทั้งหมด {totalCredit} หน่วยกิต</p>
+          <div className="flex gap-1">
+            สถานะ{" "}
+            {transcriptDataProps.is_graduate ? (
+              <p className=" text-success">ผ่าน</p>
+            ) : (
+              <p className="text-danger">ไม่ผ่าน</p>
+            )}
+          </div>
+        </div>
+        <div className="flex flex-col w-full justify-center items-center col-span-12 md:col-span-7">
+          <Progress
+            type="dashboard"
+            status="active"
+            size={200}
+            percent={calTotalCredit(totalCredit)}
+            strokeColor={twoColors}
+          />
+          <p className=" max-w-[500px] text-center text-gray-500">
+            ตรวจสอบสถานะการจบการศึกษาของคุณ
+            หากพบวิชาที่ไม่ผ่านหรือไม่ได้ลงทะเบียน
+            กรุณาวางแผนหรือติดต่ออาจารย์ที่ปรึกษา
+          </p>
+        </div>
       </div>
       <hr className="border border-gray-200 my-4"></hr>
 
@@ -460,12 +469,18 @@ const Result = (props: Props) => {
         </div>
       </div>
       <div className="mt-8">
-        <h3 className="my-2 text-xl">วิชาที่ยังไม่สมบูรณ์</h3>
+        <h3 className="my-2 text-xl">วิชาที่ลงทะเบียนแล้ว</h3>
         <div className=" hidden md:block">
-          <Table columns={columns} dataSource={data} />
+          <Table
+            columns={columns}
+            dataSource={transcriptDataProps.enrolled_courses}
+          />
         </div>
         <div className="block md:hidden">
-          <Table columns={mobileColumns} dataSource={data} />
+          <Table
+            columns={mobileColumns}
+            dataSource={transcriptDataProps.enrolled_courses}
+          />
         </div>
       </div>
     </div>
