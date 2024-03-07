@@ -4,7 +4,7 @@ import React from "react";
 import { InboxOutlined } from "@ant-design/icons";
 import { UploadProps, Upload } from "antd";
 
-import Result from "@/components/Result";
+import Result from "@/app/(feature)/upload-transcript/components/Result";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import {
   transcriptSelector,

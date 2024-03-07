@@ -12,6 +12,7 @@ import {
 } from "@/data/all-subject";
 import { Button, Select } from "antd";
 import React, { useState } from "react";
+import CourseInput from "./components/CourseInput";
 
 const grade = [
   { value: "A", label: "A" },
@@ -40,10 +41,6 @@ const FillInPage = (props: Props) => {
   const [countFacultyOfScience, setCountFacultyOfScience] = useState([1]);
   const [countElectiveCourse, setCountElectiveCourse] = useState([1]);
   const [countFreeElectiveCourse, setCountFreeElectiveCourse] = useState([1]);
-
-  const onSubmit = (data:any) => {
-    console.log(data);
-  };
 
   const handleAddLiveHappily = () => {
     setCountLiveHappily((prev) => {
@@ -187,202 +184,78 @@ const FillInPage = (props: Props) => {
         </h2>
         <div>
           <h3 className=" font-bold text-lg mt-2">หมวดวิชาศึกษาทั่วไป</h3>
-
           {/* กลุ่มสาระอยู่ดีมีสุข */}
-          <div className="flex justify-between">
-            <h4 className="flex justify-center items-center">
-              กลุ่มสาระอยู่ดีมีสุข
-            </h4>
-            <div className="flex space-x-3">
-              <Button type="primary" onClick={handleAddLiveHappily}>
-                + เพิ่ม
-              </Button>
-              <Button type="primary" onClick={handleDeleteLiveHappily}>
-                - ลบ
-              </Button>
-            </div>
-          </div>
-          {countLiveHappily.map((index) => (
-            <div className="flex space-x-3 my-2" key={index}>
-              <Select
-                placeholder="ค้นหาด้วยรหัสวิชาหรือชื่อวิชา"
-                style={{ width: "90%" }}
-                allowClear
-                options={subJectLiveHappily}
-              />
-              <Select
-                style={{ width: "10%" }}
-                allowClear
-                placeholder="เกรด"
-                options={grade}
-              />
-            </div>
-          ))}
+          <CourseInput
+            subjectOptions={{
+              title: "กลุ่มสาระอยู่ดีมีสุข",
+              options: subJectLiveHappily,
+            }}
+            grade={grade}
+            handleAdd={handleAddLiveHappily}
+            handleDelete={handleDeleteLiveHappily}
+            count={countLiveHappily}
+          />
 
           {/* กลุ่มสาระศาสตร์แห่งผู้ประกอบการ */}
-          <div className="flex justify-between">
-            <h4 className="mt-2">กลุ่มสาระศาสตร์แห่งผู้ประกอบการ</h4>
-            <div className="flex space-x-3">
-              <Button
-                type="primary"
-                onClick={handleAddScienceOfEntrepreneurship}
-              >
-                + เพิ่ม
-              </Button>
-              <Button
-                type="primary"
-                onClick={handleDeleteScienceOfEntrepreneurship}
-              >
-                - ลบ
-              </Button>
-            </div>
-          </div>
-          {countScienceOfEntrepreneurship.map((index) => (
-            <div className="flex space-x-3 my-2" key={index}>
-              <Select
-                placeholder="ค้นหาด้วยรหัสวิชาหรือชื่อวิชา"
-                style={{ width: "90%" }}
-                allowClear
-                options={subJectScienceOfEntrepreneurship}
-              />
-              <Select
-                style={{ width: "10%" }}
-                allowClear
-                placeholder="เกรด"
-                options={grade}
-              />
-            </div>
-          ))}
+          <CourseInput
+            subjectOptions={{
+              title: "กลุ่มสาระศาสตร์แห่งผู้ประกอบการ",
+              options: subJectScienceOfEntrepreneurship,
+            }}
+            grade={grade}
+            handleAdd={handleAddScienceOfEntrepreneurship}
+            handleDelete={handleDeleteScienceOfEntrepreneurship}
+            count={countScienceOfEntrepreneurship}
+          />
 
           {/* กลุ่มสาระภาษาและการสื่อสาร */}
-          <div className="flex justify-between">
-            <h4 className="mt-2">กลุ่มสาระภาษาและการสื่อสาร</h4>
-            <div className="flex space-x-3">
-              <Button
-                type="primary"
-                onClick={handleAddLanguageAndCommunication}
-              >
-                + เพิ่ม
-              </Button>
-              <Button
-                type="primary"
-                onClick={handleDeleteLanguageAndCommunication}
-              >
-                - ลบ
-              </Button>
-            </div>
-          </div>
-          {countLanguageAndCommunication.map((index) => (
-            <div className="flex space-x-3 my-2" key={index}>
-              <Select
-                placeholder="ค้นหาด้วยรหัสวิชาหรือชื่อวิชา"
-                style={{ width: "90%" }}
-                allowClear
-                options={subJectLanguageAndCommunication}
-              />
-              <Select
-                style={{ width: "10%" }}
-                allowClear
-                placeholder="เกรด"
-                options={grade}
-              />
-            </div>
-          ))}
+          <CourseInput
+            subjectOptions={{
+              title: "กลุ่มสาระภาษาและการสื่อสาร",
+              options: subJectLanguageAndCommunication,
+            }}
+            grade={grade}
+            handleAdd={handleAddLanguageAndCommunication}
+            handleDelete={handleDeleteLanguageAndCommunication}
+            count={countLanguageAndCommunication}
+          />
 
           {/* กลุ่มสาระพลเมืองไทยและพลเมืองโลก */}
-          <div className="flex justify-between">
-            <h4 className="mt-2">กลุ่มสาระพลเมืองไทยและพลเมืองโลก</h4>
-            <div className="flex space-x-3">
-              <Button
-                type="primary"
-                onClick={handleAddThaiCitizensAndWorldCitizens}
-              >
-                + เพิ่ม
-              </Button>
-              <Button
-                type="primary"
-                onClick={handleDeleteThaiCitizensAndWorldCitizens}
-              >
-                - ลบ
-              </Button>
-            </div>
-          </div>
-          {countThaiCitizensAndWorldCitizens.map((index) => (
-            <div className="flex space-x-3 my-2" key={index}>
-              <Select
-                placeholder="ค้นหาด้วยรหัสวิชาหรือชื่อวิชา"
-                style={{ width: "90%" }}
-                allowClear
-                options={subJectThaiCitizensAndWorldCitizens}
-              />
-              <Select
-                style={{ width: "10%" }}
-                allowClear
-                placeholder="เกรด"
-                options={grade}
-              />
-            </div>
-          ))}
+          <CourseInput
+            subjectOptions={{
+              title: "กลุ่มสาระพลเมืองไทยและพลเมืองโลก",
+              options: subJectThaiCitizensAndWorldCitizens,
+            }}
+            grade={grade}
+            handleAdd={handleAddThaiCitizensAndWorldCitizens}
+            handleDelete={handleDeleteThaiCitizensAndWorldCitizens}
+            count={countThaiCitizensAndWorldCitizens}
+          />
 
           {/* กลุ่มสาระสุนทรียศาสตร์ */}
-          <div className="flex justify-between">
-            <h4 className="mt-2">กลุ่มสาระสุนทรียศาสตร์</h4>
-            <div className="flex space-x-3">
-              <Button type="primary" onClick={handleAddAesthetics}>
-                + เพิ่ม
-              </Button>
-              <Button type="primary" onClick={handleDeleteAesthetics}>
-                - ลบ
-              </Button>
-            </div>
-          </div>
-          {countAesthetics.map((index) => (
-            <div className="flex space-x-3 my-2" key={index}>
-              <Select
-                placeholder="ค้นหาด้วยรหัสวิชาหรือชื่อวิชา"
-                style={{ width: "90%" }}
-                allowClear
-                options={subJectAesthetics}
-              />
-              <Select
-                style={{ width: "10%" }}
-                allowClear
-                placeholder="เกรด"
-                options={grade}
-              />
-            </div>
-          ))}
+          <CourseInput
+            subjectOptions={{
+              title: "กลุ่มสาระสุนทรียศาสตร์",
+              options: subJectAesthetics,
+            }}
+            grade={grade}
+            handleAdd={handleAddAesthetics}
+            handleDelete={handleDeleteAesthetics}
+            count={countAesthetics}
+          />
 
           {/* กลุ่มสาระของหมวดวิชาศึกษาทั่วไปเฉพาะที่เป็นรายวิชาของคณะต้นสังกัดของหลักสูตร */}
-          <div className="flex justify-between">
-            <h4 className="mt-2">
-              กลุ่มสาระของหมวดวิชาศึกษาทั่วไปเฉพาะที่เป็นรายวิชาของคณะต้นสังกัดของหลักสูตร
-            </h4>
-            <div className="flex space-x-3">
-              <Button type="primary" onClick={handleAddFacultyOfScience}>
-                + เพิ่ม
-              </Button>
-              <Button type="primary" onClick={handleDeleteFacultyOfScience}>
-                - ลบ
-              </Button>
-            </div>
-          </div>
-          {countFacultyOfScience.map((index) => (
-            <div className="flex space-x-3 my-2" key={index}>
-              <Select
-                placeholder="ค้นหาด้วยรหัสวิชาหรือชื่อวิชา"
-                style={{ width: "90%" }}
-                allowClear
-                options={subJectFacultyOfScience}
-              />
-              <Select
-                style={{ width: "10%" }}
-                allowClear
-                placeholder="เกรด"
-                options={grade}
-              />
-            </div>
-          ))}
+          <CourseInput
+            subjectOptions={{
+              title:
+                "กลุ่มสาระของหมวดวิชาศึกษาทั่วไปเฉพาะที่เป็นรายวิชาของคณะต้นสังกัดของหลักสูตร",
+              options: subJectFacultyOfScience,
+            }}
+            grade={grade}
+            handleAdd={handleAddFacultyOfScience}
+            handleDelete={handleDeleteFacultyOfScience}
+            count={countFacultyOfScience}
+          />
         </div>
 
         <div>
