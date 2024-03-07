@@ -16,6 +16,20 @@
   visibility: visible;
 }
 
+.progress-animation {
+  transition: width 60s ease-in-out; /* Adjust the duration and timing function as needed */
+}
+
+@keyframes increaseWidth {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

@@ -18,7 +18,6 @@ import {
 import { SearchOutlined } from "@ant-design/icons";
 import {
   Button,
-  GetRef,
   Input,
   Progress,
   ProgressProps,
@@ -28,7 +27,7 @@ import {
   TableColumnsType,
 } from "antd";
 import { FilterDropdownProps } from "antd/es/table/interface";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 
 type Props = {
@@ -40,8 +39,6 @@ const twoColors: ProgressProps["strokeColor"] = {
   "100%": "#87d068",
 };
 
-type InputRef = GetRef<typeof Input>;
-
 interface DataType {
   course_id: string;
   course_name: string;
@@ -51,34 +48,9 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-const data: DataType[] = [
-  {
-    course_id: "01418442",
-    course_name: "hell web tech",
-    course_credit: 3,
-    student_grade: "F",
-  },
-  {
-    course_id: "01361102",
-    course_name: "Course name 2",
-    course_credit: 2,
-    student_grade: "Z",
-  },
-  {
-    course_id: "01361103",
-    course_name: "Course name 3",
-    course_credit: 4,
-    student_grade: "SSR",
-  },
-  {
-    course_id: "01361104",
-    course_name: "Course name 4",
-    course_credit: 3,
-    student_grade: "A",
-  },
-];
-
 const Result = (props: Props) => {
+  const [animationPercentage, setAnimationPercentage] = useState(0);
+
   // Props
   const { transcriptDataProps } = props;
   console.log("transcriptDataProps", transcriptDataProps);
@@ -94,6 +66,20 @@ const Result = (props: Props) => {
     totalCreditPerCategory.วิชาเฉพาะเลือก;
 
   console.log("totalCredit", totalCredit);
+
+  useEffect(() => {
+    setAnimationPercentage(0);
+    const interval = setInterval(() => {
+      setAnimationPercentage((prevPercentage) => {
+        const nextPercentage = prevPercentage + 1;
+        return nextPercentage <= calTotalCredit(totalCredit)
+          ? nextPercentage
+          : prevPercentage;
+      });
+    }, 30); // Adjust the interval based on your preference
+
+    return () => clearInterval(interval);
+  }, [totalCredit]);
 
   // search table
   const [searchText, setSearchText] = useState("");
@@ -302,9 +288,10 @@ const Result = (props: Props) => {
             type="dashboard"
             status="active"
             size={200}
-            percent={calTotalCredit(totalCredit)}
+            percent={animationPercentage}
             strokeColor={twoColors}
           />
+
           <p className=" max-w-[500px] text-center text-gray-500">
             ตรวจสอบสถานะการจบการศึกษาของคุณ
             หากพบวิชาที่ไม่ผ่านหรือไม่ได้ลงทะเบียน

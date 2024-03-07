@@ -51,6 +51,9 @@ const UploadTranscriptPage = () => {
   const handleUpload = async (file: File) => {
     console.log(file);
     try {
+      if (!file.name.includes("STD_GRADE_REPORT_")) {
+        throw new Error("ชื่อไฟล์ไม่ถูกต้อง");
+      }
       const formData = new FormData();
       formData.append("file", file);
       const actionResult = await dispatch(uploadTranscript(formData));
@@ -69,8 +72,14 @@ const UploadTranscriptPage = () => {
           })
         );
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to upload transcript", error);
+      dispatch(
+        showNotification({
+          message: "มีข้อผิดพลาดในการอัพโหลด: " + error.message,
+          type: NotificationType.Error,
+        })
+      );
     }
   };
 
@@ -99,10 +108,13 @@ const UploadTranscriptPage = () => {
         <div className="mt-12 px-0 lg:px-28 flex justify-center items-center">
           <div className="animate-spin rounded-full h-40 w-40 border-t-2 border-b-2 border-[#B2BB1E]"></div>
         </div>
+      ) : transcriptReducer.transcriptData &&
+        transcriptReducer.status !== "failed" ? (
+        <Result transcriptDataProps={transcriptReducer.transcriptData} />
       ) : (
-        transcriptReducer.transcriptData && (
-          <Result transcriptDataProps={transcriptReducer.transcriptData} />
-        )
+        <div className="mt-12 px-0 lg:px-28">
+          <div>Error uploading transcript</div>
+        </div>
       )}
     </>
   );
