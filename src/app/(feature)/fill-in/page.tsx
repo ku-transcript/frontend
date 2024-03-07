@@ -11,7 +11,6 @@ import {
   subJectCS60Elective,
 } from "@/data/all-subject";
 import { Button, Select } from "antd";
-import { useForm, Controller } from "react-hook-form";
 import React, { useState } from "react";
 
 const grade = [
@@ -41,8 +40,6 @@ const FillInPage = (props: Props) => {
   const [countFacultyOfScience, setCountFacultyOfScience] = useState([1]);
   const [countElectiveCourse, setCountElectiveCourse] = useState([1]);
   const [countFreeElectiveCourse, setCountFreeElectiveCourse] = useState([1]);
-
-  const { control, handleSubmit } = useForm();
 
   const onSubmit = (data:any) => {
     console.log(data);
@@ -177,7 +174,7 @@ const FillInPage = (props: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <>
       <div className="relative">
         <h1 className="text-2xl">กรอกข้อมูลรายวิชาและเกรดของคุณ</h1>
         <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
@@ -735,7 +732,7 @@ const FillInPage = (props: Props) => {
       <Button type="primary" className="w-full my-3">
         ยืนยัน
       </Button>
-    </form>
+    </>
   );
 };
 
