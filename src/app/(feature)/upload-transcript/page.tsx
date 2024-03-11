@@ -53,7 +53,7 @@ const UploadTranscriptPage = () => {
   };
 
   const handleUpload = async (file: File) => {
-    console.log(file);
+    console.log(file.name);
     try {
       if (!file.name.includes("STD_GRADE_REPORT_")) {
         throw new Error("ชื่อไฟล์ไม่ถูกต้อง");

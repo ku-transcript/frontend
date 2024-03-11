@@ -64,7 +64,7 @@ const LandingPage = () => {
           {/* show clip when lg */}
           <div className="hidden lg:block absolute inset-y-0 h-full w-full">
             <svg
-              className="absolute bottom-0 h-full w-full text-slate-100"
+              className="absolute bottom-0 h-full w-full text-slate-50"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
             >
@@ -123,7 +123,7 @@ const LandingPage = () => {
       </div>
 
       {/* card section */}
-      <div className="bg-slate-100 -mt-1">
+      <div className="bg-slate-50 -mt-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 container">
           <div className="grid lg:grid-cols-12 gap-8">
             <div className="col-span-4 -translate-y-36 lg:-translate-y-54">
@@ -185,7 +185,7 @@ const LandingPage = () => {
       </div>
 
       {/* card */}
-      <div className="bg-slate-100">
+      <div className="bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 container">
           <div className="grid lg:grid-cols-12 gap-8">
             {/* card 1 */}
