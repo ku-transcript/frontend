@@ -3,7 +3,6 @@
 import { Button, Tour, TourProps } from "antd";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import Logo from "@/assets/ku-outstanding-footer-logo-white.png";
 import FeaturesOverview from "../../public/undraw_features_overview_re_2w78.svg";
 import FillForm from "../../public/undraw_fill_form_re_cwyf.svg";
 import GoingUp from "../../public/undraw_going_up_re_86kg.svg";

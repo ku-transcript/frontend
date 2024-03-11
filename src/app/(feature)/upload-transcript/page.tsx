@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { InboxOutlined } from "@ant-design/icons";
-import { UploadProps, Upload } from "antd";
+import { CloseCircleOutlined, InboxOutlined } from "@ant-design/icons";
+import GoingUp from "../../../../public/undraw_going_up_re_86kg.svg";
+import { UploadProps, Upload, Result, Button, Typography } from "antd";
 
-import Result from "@/app/(feature)/upload-transcript/components/Result";
+import ResultTranscript from "@/app/(feature)/upload-transcript/components/ResultTranscript";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux-hooks";
 import {
   transcriptSelector,
@@ -12,8 +13,11 @@ import {
 } from "@/store/slices/transcriptSlice";
 import { showNotification } from "@/store/slices/notificationSlice";
 import { NotificationType } from "@/types/notificationType";
+import Image from "next/image";
 
 const { Dragger } = Upload;
+
+const { Paragraph, Text } = Typography;
 
 const UploadTranscriptPage = () => {
   // Redux
@@ -93,9 +97,16 @@ const UploadTranscriptPage = () => {
       {isUploaded === false ? (
         <div className="mt-8 px-0 lg:px-28">
           <Dragger {...props}>
-            <p className="ant-upload-drag-icon">
+            {/* <p className="ant-upload-drag-icon">
               <InboxOutlined />
-            </p>
+            </p> */}
+            <Image
+              src={GoingUp}
+              width={1000}
+              height={1000}
+              alt="upload"
+              className="mx-auto w-40 h-40 text-white"
+            />
             <p className="ant-upload-text">
               คลิกหรือลากวางไฟล์ที่นี้เพื่ออัพโหลด
             </p>
@@ -110,11 +121,41 @@ const UploadTranscriptPage = () => {
         </div>
       ) : transcriptReducer.transcriptData &&
         transcriptReducer.status !== "failed" ? (
-        <Result transcriptDataProps={transcriptReducer.transcriptData} />
+        <ResultTranscript
+          transcriptDataProps={transcriptReducer.transcriptData}
+        />
       ) : (
-        <div className="mt-12 px-0 lg:px-28">
-          <div>Error uploading transcript</div>
-        </div>
+        <Result
+          status="error"
+          title="เอ๊ะ! มีบางอย่างผิดพลาด"
+          subTitle="ขออภัย ไม่สามารถอัพโหลดทรานสคริปของคุณได้"
+          extra={[
+            <Button danger key="console" onClick={() => setIsUploaded(false)}>
+              ลองอีกครั้ง
+            </Button>,
+          ]}
+        >
+          <div className="desc">
+            <Paragraph>
+              <Text
+                strong
+                style={{
+                  fontSize: 16,
+                }}
+              >
+                กรุณาตรวจสอบข้อผิดพลาดด้านล่าง
+              </Text>
+            </Paragraph>
+            <Paragraph>
+              <CloseCircleOutlined className="site-result-demo-error-icon" />{" "}
+              ชื่อไฟล์ไม่ถูกต้อง
+            </Paragraph>
+            <Paragraph>
+              <CloseCircleOutlined className="site-result-demo-error-icon" />{" "}
+              ไฟล์ที่อัพโหลดไม่ใช่ไฟล์ STD_GRADE_REPORT
+            </Paragraph>
+          </div>
+        </Result>
       )}
     </>
   );

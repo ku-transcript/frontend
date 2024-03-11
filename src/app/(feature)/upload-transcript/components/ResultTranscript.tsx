@@ -48,7 +48,7 @@ interface DataType {
 
 type DataIndex = keyof DataType;
 
-const Result = (props: Props) => {
+const ResultTranscript = (props: Props) => {
   const [animationPercentage, setAnimationPercentage] = useState(0);
 
   // Props
@@ -474,4 +474,4 @@ const Result = (props: Props) => {
   );
 };
 
-export default Result;
+export default ResultTranscript;
