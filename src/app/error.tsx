@@ -16,7 +16,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-[#006664] flex flex-col justify-center items-center">
+    <div className="min-h-screen bg-gradient-to-r from-green-700 to-green-900 flex flex-col justify-center items-center">
       <h2 className="text-3xl font-bold text-red-600 mb-4">
         Something went wrong!
       </h2>

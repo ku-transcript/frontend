@@ -1,126 +1,54 @@
-"use client";
-
-import React from "react";
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/react";
 import Link from "next/link";
-import { useState } from "react";
+import React from "react";
+import Image from "next/image";
+import Logo from "@/assets/ku-outstanding-footer-logo-white.png";
 
-const siteConfig = {
-  name: "Sittipong",
-  description: "Sittipong Hemloun's personal website",
-  navItems: [
-    {
-      label: "หลักสูตร",
-      href: "/curriculum",
-    },
-    {
-      label: "เช็คโดยใช้ Transcript",
-      href: "/upload-transcript",
-    },
-    {
-      label: "เช็คโดยไม่ใช้ Transcript",
-      href: "/fill-in",
-    },
-  ],
-  navMenuItems: [
-    {
-      label: "หลักสูตร",
-      href: "/curriculum",
-    },
-    {
-      label: "เช็คโดยใช้ Transcript",
-      href: "/upload-transcript",
-    },
-    {
-      label: "เช็คโดยไม่ใช้ Transcript",
-      href: "/fill-in",
-    },
-  ],
+type Props = {};
+
+const Navbar = (props: Props) => {
+  return (
+    <nav className="flex justify-between">
+      <div className="flex justify-center items-center space-x-4">
+        <Image
+          src={Logo}
+          alt="ku"
+          width={2000}
+          height={2000}
+          className="w-20 h-20 text-white"
+        />
+        <div className="text-white text-3xl font-bold">
+          <div>KASETSART</div>
+          <div className=" font-light">UNIVERSITY</div>
+        </div>
+      </div>
+
+      {/* Regular menu for larger screens */}
+      <div className="hidden lg:block mr-12 mt-2">
+        <ul className="flex space-x-8">
+          <li>
+            <Link href={"curriculum"} className="text-white relative">
+              <div className="z-10">หลักสูตร</div>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
+            </Link>
+          </li>
+          <li>
+            <Link href={"upload-transcript"} className="text-white  relative">
+              <div className="z-10">เช็คโดยใช้ Transcript</div>
+
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
+            </Link>
+          </li>
+          <li>
+            <Link href={"fill-in"} className="text-white  relative">
+              <div className="z-10">เช็คโดยไม่ใช้ Transcript</div>
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
+            </Link>
+          </li>
+        </ul>
+      </div>
+      <div></div>
+    </nav>
+  );
 };
 
-export default function NavbarComponent() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Close the menu when a NavbarMenuItem is clicked
-  const handleMenuItemClick = () => {
-    setIsMenuOpen(false);
-  };
-
-  // Open the menu when the NavbarMenu is opened
-  const handleMenuToggleClick = () => {
-    if (isMenuOpen) {
-      setIsMenuOpen(false);
-    } else {
-      setIsMenuOpen(true);
-    }
-  };
-
-  return (
-    <Navbar
-      isBordered
-      isMenuOpen={isMenuOpen}
-      position="sticky"
-      className="bg-gradient-to-r from-green-700 to-green-900 text-white"
-    >
-      <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle onClick={handleMenuToggleClick} />
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden pr-3" justify="center">
-        <NavbarBrand>
-          <Link href={"/"} className="font-bold text-xl text-inherit">
-            KU Transcript
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
-
-      <NavbarContent className="hidden sm:flex gap-8" justify="end">
-        <NavbarBrand>
-          <Link href={"/"} className="font-bold text-xl text-inherit">
-            KU Transcript
-          </Link>
-        </NavbarBrand>
-        <NavbarItem>
-          <Link href="/curriculum" className="relative">
-            <div className="z-10">หลักสูตร</div>
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/upload-transcript" className="relative">
-            <div className="z-10">เช็คโดยใช้ Transcript</div>
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/fill-in" className="relative">
-            <div className="z-10">เช็คโดยไม่ใช้ Transcript</div>
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-
-      <NavbarMenu>
-        {siteConfig.navMenuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              href={item.href}
-              onClick={handleMenuItemClick}
-            >
-              {item.label}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </Navbar>
-  );
-}
+export default Navbar;

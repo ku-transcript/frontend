@@ -2,7 +2,7 @@ import { allCampus } from "@/data/allCampusData";
 import { allFaculty } from "@/data/allFacultyData";
 import { allSciencMajor } from "@/data/allSciMajor";
 import { HomeOutlined } from "@ant-design/icons";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Empty } from "antd";
 import Link from "next/link";
 import React from "react";
 
@@ -75,18 +75,25 @@ const FacultyMajorPage = (props: Props) => {
       </div>
 
       <div className="mt-4">
-        {allSciencMajor.map((major) => {
-          return (
-            <Link
-              href={`/curriculum/${campusId}/${facultyId}/${major.id}`}
-              key={major.id}
-            >
-              <div className=" border bg-white p-2 m-2 rounded-md">
-                {major.name}
-              </div>
-            </Link>
-          );
-        })}
+        {facultyId === "1" ? (
+          allSciencMajor.map((major) => {
+            return (
+              <Link
+                href={`/curriculum/${campusId}/${facultyId}/${major.id}`}
+                key={major.id}
+              >
+                <div className=" border bg-white p-2 m-2 rounded-md">
+                  {major.name}
+                </div>
+              </Link>
+            );
+          })
+        ) : (
+          <Empty
+            className="w-full flex justify-center flex-col items-center mt-44"
+            description={<span>ยังไม่มีข้อมูลสาขาวิชาในคณะนี้</span>}
+          ></Empty>
+        )}
       </div>
     </>
   );

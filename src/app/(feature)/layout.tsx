@@ -1,4 +1,4 @@
-import NavbarComponent from "@/components/Navbar";
+import NavbarComponent from "@/app/(feature)/components/Navbar";
 
 export default function FeatureLayout({
   children,

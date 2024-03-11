@@ -1,7 +1,7 @@
 export const allFaculty = [
   {
     id: "1",
-    name: "คณะวิศวกรรมศาสตร์",
+    name: "คณะวิทยาศาสตร์",
   },
   {
     id: "2",
@@ -13,7 +13,7 @@ export const allFaculty = [
   },
   {
     id: "4",
-    name: "คณะวิทยาศาสตร์",
+    name: "คณะวิศวกรรมศาสตร์",
   },
   {
     id: "5",

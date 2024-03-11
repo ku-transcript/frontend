@@ -3,7 +3,6 @@
 import { Button, Tour, TourProps } from "antd";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import Logo from "@/assets/ku-outstanding-footer-logo-white.png";
 import FeaturesOverview from "../../public/undraw_features_overview_re_2w78.svg";
 import FillForm from "../../public/undraw_fill_form_re_cwyf.svg";
 import GoingUp from "../../public/undraw_going_up_re_86kg.svg";
@@ -13,6 +12,8 @@ import Unlock from "../../public/undraw_unlock_re_a558.svg";
 import Welcome from "../../public/undraw_welcome_cats_thqn.svg";
 import WholeYear from "../../public/undraw_a_whole_year_vnfm.svg";
 import Link from "next/link";
+import FeatureCard from "@/components/FeatureCard";
+import Navbar from "@/components/Navbar";
 
 const LandingPage = () => {
   const ref1 = useRef(null);
@@ -73,50 +74,7 @@ const LandingPage = () => {
 
           <div className="max-w-7xl mx-auto my-4 px-4 sm:px-6 lg:px-8 container">
             {/* center navbar */}
-            <nav className="flex justify-between">
-              <div className="flex justify-center items-center space-x-4">
-                <Image
-                  src={Logo}
-                  alt="ku"
-                  width={100}
-                  height={100}
-                  className="w-20 h-20 text-white"
-                />
-                <div className="text-white text-3xl font-bold">
-                  <div>KASETSART</div>
-                  <div className=" font-light">UNIVERSITY</div>
-                </div>
-              </div>
-
-              {/* Regular menu for larger screens */}
-              <div className="hidden lg:block mr-12 mt-2">
-                <ul className="flex space-x-8">
-                  <li>
-                    <Link href={"curriculum"} className="text-white relative">
-                      <div className="z-10">หลักสูตร</div>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={"upload-transcript"}
-                      className="text-white  relative"
-                    >
-                      <div className="z-10">เช็คโดยใช้ Transcript</div>
-
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"fill-in"} className="text-white  relative">
-                      <div className="z-10">เช็คโดยไม่ใช้ Transcript</div>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div></div>
-            </nav>
+            <Navbar />
 
             {/* center height content */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-screen -mt-20">
@@ -168,85 +126,50 @@ const LandingPage = () => {
       <div className="bg-slate-100 -mt-1">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 container">
           <div className="grid lg:grid-cols-12 gap-8">
-            {/* card 1 */}
-            <div
-              ref={ref2}
-              className="col-span-4 mt-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex h-[500px] flex-col  -translate-y-36 lg:-translate-y-36 hover:scale-105 duration-300"
-            >
-              {/* image */}
-              <Image
-                src={FeaturesOverview}
-                className="h-40 w-40 bg-gray-200 rounded-full mb-8 "
-                alt="ku"
-                width={200}
-                height={200}
+            <div className="col-span-4 -translate-y-36 lg:-translate-y-54">
+              <FeatureCard
+                ref={ref2}
+                css={
+                  " mt-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex h-[500px] flex-col  "
+                }
+                imageSrc={FeaturesOverview}
+                title={"ค้นหาหลักสูตร"}
+                description={
+                  "คุณสามารถค้นหาหลักสูตรและตรวจสอบเงื่อนไขในการจบการศึกษาว่ามีรายวิชาใดบ้างที่จำเป็นในการจบการศึกษา"
+                }
+                link={"curriculum"}
+                linkText={"ดูเพิ่มเติม"}
               />
-              {/* title */}
-              <h2 className="text-2xl font-bold mb-4">ค้นหาหลักสูตร</h2>
-              {/* description */}
-              <p className="text-gray-500">
-                คุณสามารถค้นหาหลักสูตรและตรวจสอบเงื่อนไขในการจบการศึกษาว่ามีรายวิชาใดบ้างที่จำเป็นในการจบการศึกษา
-              </p>
-              {/* button */}
-              <Button type="primary" className="mt-8">
-                <Link href={"curriculum"}>ดูเพิ่มเติม</Link>
-              </Button>
             </div>
-
-            {/* card 2 */}
-            <div
-              ref={ref3}
-              className="col-span-4 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col -translate-y-36 lg:-translate-y-16 hover:scale-105 duration-300"
-            >
-              {/* image */}
-              <Image
-                src={FillForm}
-                className="h-40 w-40 bg-gray-200 rounded-full mb-8"
-                alt="ku"
-                width={100}
-                height={100}
+            <div className="col-span-4 -translate-y-36 lg:-translate-y-16">
+              <FeatureCard
+                ref={ref3}
+                css={
+                  "border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col "
+                }
+                imageSrc={FillForm}
+                title={"เช็คโดยใช้ Transcript"}
+                description={
+                  "หากคุณมีไฟล์ Transcript ที่เป็น ของมหาวิทยาลัยเกษตรศาสตรที่เป็นไฟล์ pdf คุณสามารถใช้ไฟล์นั้นตรวจสอบได้เลยว่าคุณสามารถ จบการศึกษาได้หรือไม่"
+                }
+                link={"upload-transcript"}
+                linkText={"อัพโหลด"}
               />
-              {/* title */}
-              <h2 className="text-2xl font-bold mb-4">เช็คโดยใช้ Transcript</h2>
-              {/* description */}
-              <p className="text-gray-500">
-                หากคุณมีไฟล์ Transcript ที่เป็น
-                ของมหาวิทยาลัยเกษตรศาสตรที่เป็นไฟล์ pdf
-                คุณสามารถใช้ไฟล์นั้นตรวจสอบได้เลยว่าคุณสามารถ
-                จบการศึกษาได้หรือไม่
-              </p>
-              {/* button */}
-              <Button type="primary" className="mt-8">
-                <Link href={"upload-transcript"}>อัพโหลด</Link>
-              </Button>
             </div>
-            {/* card 3 */}
-            <div
-              ref={ref4}
-              className="col-span-4 mb-4 lg:mt-0 border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col -translate-y-36 lg:-translate-y-36 hover:scale-105 duration-300"
-            >
-              {/* image */}
-              <Image
-                src={GoingUp}
-                className="h-40 w-40 bg-gray-200 rounded-full mb-8 "
-                alt="ku"
-                width={100}
-                height={100}
+            <div className="col-span-4 -translate-y-36 lg:-translate-y-54">
+              <FeatureCard
+                ref={ref4}
+                css={
+                  "border-2 bg-white shadow-lg rounded-lg p-8 justify-center items-center flex flex-col "
+                }
+                imageSrc={GoingUp}
+                title={"เช็คโดยไม่ใช้ Transcript"}
+                description={
+                  "คุณสามารถตรวจสอบสถานะการจบการศึกษาแบบไม่ใช้ Transcript โดยการเลือกหลักสูตรของคุณและใส่รายวิชา กับเกรดที่ได้ลงทะเบียนแล้ว"
+                }
+                link={"fill-in"}
+                linkText={"กรอกข้อมูล"}
               />
-              {/* title */}
-              <h2 className="text-2xl font-bold mb-4">
-                เช็คโดยไม่ใช้ Transcript
-              </h2>
-              {/* description */}
-              <p className="text-gray-500">
-                คุณสามารถตรวจสอบสถานะการจบการศึกษาแบบไม่ใช้ Transcript
-                โดยการเลือกหลักสูตรของคุณและใส่รายวิชา
-                กับเกรดที่ได้ลงทะเบียนแล้ว
-              </p>
-              {/* button */}
-              <Button type="primary" className="mt-8">
-                <Link href={"fill-in"}>กรอกข้อมูล</Link>
-              </Button>
             </div>
           </div>
         </div>

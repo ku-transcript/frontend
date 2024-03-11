@@ -3,7 +3,8 @@ import { allComSciSyllabus } from "@/data/allComSciSyllabusData";
 import { allFaculty } from "@/data/allFacultyData";
 import { allSciencMajor } from "@/data/allSciMajor";
 import { HomeOutlined } from "@ant-design/icons";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Empty } from "antd";
+import { m } from "framer-motion";
 import Link from "next/link";
 import React from "react";
 
@@ -104,18 +105,25 @@ const MajorSyllabusPage = (props: Props) => {
       </div>
 
       <div className="mt-4">
-        {allComSciSyllabus.map((syllabus) => {
-          return (
-            <Link
-              href={`/curriculum/${campusId}/${facultyId}/${majorId}/${syllabus.id}`}
-              key={syllabus.id}
-            >
-              <div className=" border bg-white p-2 m-2 rounded-md">
-                {syllabus.year}
-              </div>
-            </Link>
-          );
-        })}
+        {majorId === "1" ? (
+          allComSciSyllabus.map((syllabus) => {
+            return (
+              <Link
+                href={`/curriculum/${campusId}/${facultyId}/${majorId}/${syllabus.id}`}
+                key={syllabus.id}
+              >
+                <div className=" border bg-white p-2 m-2 rounded-md">
+                  {syllabus.year}
+                </div>
+              </Link>
+            );
+          })
+        ) : (
+          <Empty
+            className="w-full flex justify-center flex-col items-center mt-44"
+            description={<span>ยังไม่มีข้อมูลหลักสูตรในสาขาวิชานี้</span>}
+          ></Empty>
+        )}
       </div>
     </>
   );
