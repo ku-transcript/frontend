@@ -14,6 +14,7 @@ import Welcome from "../../public/undraw_welcome_cats_thqn.svg";
 import WholeYear from "../../public/undraw_a_whole_year_vnfm.svg";
 import Link from "next/link";
 import FeatureCard from "@/components/FeatureCard";
+import Navbar from "@/components/Navbar";
 
 const LandingPage = () => {
   const ref1 = useRef(null);
@@ -74,50 +75,7 @@ const LandingPage = () => {
 
           <div className="max-w-7xl mx-auto my-4 px-4 sm:px-6 lg:px-8 container">
             {/* center navbar */}
-            <nav className="flex justify-between">
-              <div className="flex justify-center items-center space-x-4">
-                <Image
-                  src={Logo}
-                  alt="ku"
-                  width={100}
-                  height={100}
-                  className="w-20 h-20 text-white"
-                />
-                <div className="text-white text-3xl font-bold">
-                  <div>KASETSART</div>
-                  <div className=" font-light">UNIVERSITY</div>
-                </div>
-              </div>
-
-              {/* Regular menu for larger screens */}
-              <div className="hidden lg:block mr-12 mt-2">
-                <ul className="flex space-x-8">
-                  <li>
-                    <Link href={"curriculum"} className="text-white relative">
-                      <div className="z-10">หลักสูตร</div>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href={"upload-transcript"}
-                      className="text-white  relative"
-                    >
-                      <div className="z-10">เช็คโดยใช้ Transcript</div>
-
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"fill-in"} className="text-white  relative">
-                      <div className="z-10">เช็คโดยไม่ใช้ Transcript</div>
-                      <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-              <div></div>
-            </nav>
+            <Navbar />
 
             {/* center height content */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 h-screen -mt-20">

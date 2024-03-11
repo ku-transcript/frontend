@@ -790,7 +790,7 @@ const SyllabusPage = (props: Props) => {
         <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#B2BB1E]"></span>
       </div>
 
-      <main className="mt-3">
+      <main className="mt-4">
         <div className="flex w-full justify-between bg-[#B2BB1E] p-2 text-white rounded-xl mb-4">
           <div>
             <h3>โครงสร้างหลักสูตร</h3>

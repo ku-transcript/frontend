@@ -18,12 +18,12 @@ const CurriculumPage = () => {
               <div className="bg-[#B2BB1E] text-white p-2 text-center font-semibold">
                 {campus.name}
               </div>
-              <div className="w-full h-40 overflow-hidden">
+              <div className="w-full h-30 md:h-40 overflow-hidden">
                 <Image
                   src={campus.image}
-                  width={200}
-                  height={200}
-                  className="object-cover w-full h-full transform scale-100 hover:scale-105 transition-transform duration-300"
+                  width={2000}
+                  height={2000}
+                  className="object-cover  h-full transform scale-100 hover:scale-105 transition-transform duration-300"
                   alt=""
                 />
               </div>
