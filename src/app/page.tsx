@@ -234,7 +234,7 @@ const LandingPage = () => {
                 <p className="text-gray-500">
                   ข้อมูลหลักสูตร: นำมาจาก https://registrar.ku.ac.th/cur/all
                   ซึ่งเป็นฐานข้อมูลของมหาวิทยาลัยเกษตร์ศาตร์ ข้อมูลรายวิชา:
-                  นำมาจาก
+                  นำมาจาก https://registrar.ku.ac.th/ku-ge
                 </p>
               </div>
             </div>

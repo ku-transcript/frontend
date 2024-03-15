@@ -3,7 +3,6 @@ import { Button } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 
-
 type Props = {
   css: string;
   imageSrc: any;
@@ -19,9 +18,18 @@ const FeatureCard = forwardRef<HTMLDivElement, Props>((props, ref) => {
   useEffect(() => {
     if (ref && "current" in ref) {
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => setVisible(entry.isIntersecting));
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.unobserve(ref.current!); // Stop observing once visible
+          }
+        });
       });
       observer.observe(ref.current!);
+
+      return () => {
+        observer.disconnect(); // Cleanup observer on unmount
+      };
     }
   }, [ref]);
 
@@ -29,14 +37,13 @@ const FeatureCard = forwardRef<HTMLDivElement, Props>((props, ref) => {
     <div
       ref={ref}
       className={
-        props.css +
-        `fade-in-section ${isVisible ? "is-visible" : ""}`
+        props.css + ` fade-in-section ${isVisible ? "is-visible" : ""}`
       }
     >
       <Image
         src={props.imageSrc}
         alt={props.title}
-        className="h-40 w-40 bg-gray-200 rounded-full mb-8 "
+        className="h-40 w-40 bg-gray-200 rounded-full mb-8"
         width={200}
         height={200}
       />

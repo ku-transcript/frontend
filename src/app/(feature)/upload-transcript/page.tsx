@@ -31,20 +31,33 @@ const UploadTranscriptPage = () => {
     name: "file",
     multiple: true,
     // action: "http://localhost:3000/upload-transcript", // for local development
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188", // for production
+    action: "https://ku-transcript.vercel.app", // for production
     onChange(info) {
       const { status } = info.file;
-      if (status !== "uploading") {
-        console.log(info.file, info.fileList);
-        setIsUploaded(true);
-      }
-      if (status === "done") {
-        console.log(`${info.file.name} file uploaded successfully.`);
-        if (info.file.originFileObj) {
-          handleUpload(info.file.originFileObj);
+      try {
+        if (info.file.name.includes("STD_GRADE_REPORT_") === false) {
+          throw new Error("ชื่อไฟล์ไม่ถูกต้อง");
         }
-      } else if (status === "error") {
-        console.error(`${info.file.name} file upload failed.`);
+        if (status !== "uploading") {
+          console.log(info.file, info.fileList);
+          setIsUploaded(true);
+        }
+        if (status === "done") {
+          console.log(`${info.file.name} file uploaded successfully.`);
+          if (info.file.originFileObj) {
+            handleUpload(info.file.originFileObj);
+          }
+        } else if (status === "error") {
+          console.error(`${info.file.name} file upload failed.`);
+        }
+      } catch (error: any) {
+        console.error("Failed to upload transcript", error);
+        dispatch(
+          showNotification({
+            message: "มีข้อผิดพลาดในการอัพโหลด: " + error.message,
+            type: NotificationType.Error,
+          })
+        );
       }
     },
     onDrop(e) {
@@ -54,33 +67,20 @@ const UploadTranscriptPage = () => {
 
   const handleUpload = async (file: File) => {
     console.log(file.name);
-    try {
-      if (!file.name.includes("STD_GRADE_REPORT_")) {
-        throw new Error("ชื่อไฟล์ไม่ถูกต้อง");
-      }
-      const formData = new FormData();
-      formData.append("file", file);
-      const actionResult = await dispatch(uploadTranscript(formData));
-      if (uploadTranscript.fulfilled.match(actionResult)) {
-        dispatch(
-          showNotification({
-            message: "อัพโหลดทรานสคริปสำเร็จ",
-            type: NotificationType.Success,
-          })
-        );
-      } else {
-        dispatch(
-          showNotification({
-            message: "อัพโหลดทรานสคริปไม่สำเร็จ",
-            type: NotificationType.Error,
-          })
-        );
-      }
-    } catch (error: any) {
-      console.error("Failed to upload transcript", error);
+    const formData = new FormData();
+    formData.append("file", file);
+    const actionResult = await dispatch(uploadTranscript(formData));
+    if (uploadTranscript.fulfilled.match(actionResult)) {
       dispatch(
         showNotification({
-          message: "มีข้อผิดพลาดในการอัพโหลด: " + error.message,
+          message: "อัพโหลดทรานสคริปสำเร็จ",
+          type: NotificationType.Success,
+        })
+      );
+    } else {
+      dispatch(
+        showNotification({
+          message: "อัพโหลดทรานสคริปไม่สำเร็จ",
           type: NotificationType.Error,
         })
       );
@@ -97,9 +97,6 @@ const UploadTranscriptPage = () => {
       {isUploaded === false ? (
         <div className="mt-8 px-0 lg:px-28">
           <Dragger {...props}>
-            {/* <p className="ant-upload-drag-icon">
-              <InboxOutlined />
-            </p> */}
             <Image
               src={GoingUp}
               width={1000}
